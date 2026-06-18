@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>เกมต่อจิ๊กซอว์ผังงาน (Flowchart Jigsaw)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mobile-drag-drop@2.3.0-rc.2/default.css">
     <script src="https://cdn.jsdelivr.net/npm/mobile-drag-drop@2.3.0-rc.2/index.min.js"></script>
@@ -17,168 +18,175 @@
         }
 
         body {
-            background-color: #f0f4f8;
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            background-image: radial-gradient(at 10% 20%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                              radial-gradient(at 90% 80%, rgba(191, 0, 255, 0.15) 0px, transparent 50%);
             color: #333;
             margin: 0;
-            padding: 20px;
+            padding: 15px 10px;
             display: flex;
             justify-content: center;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 800px; 
             width: 100%;
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 20px; 
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+            z-index: 10;
         }
 
-        h1, h2, h3 {
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 1.8rem; 
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        h2, h3 {
             text-align: center;
             color: #2c3e50;
+            font-size: 1.2rem;
         }
 
-        .screen {
-            display: none;
+        .screen { display: none; }
+        .screen.active { display: block; animation: fadeIn 0.4s ease-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-            .screen.active {
-                display: block;
-            }
-
-        .form-group {
-            margin-bottom: 15px;
+        .form-group { margin-bottom: 12px; }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #4b5563;
+            font-size: 14px;
         }
-
-            .form-group label {
-                display: block;
-                margin-bottom: 5px;
-                font-weight: 600;
-            }
-
-            .form-group input {
-                width: 100%;
-                padding: 10px;
-                border: 1px solid #ccc;
-                border-radius: 6px;
-                font-size: 16px;
-            }
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s;
+            background: rgba(255,255,255,0.9);
+        }
+        .form-group input:focus {
+            border-color: #3b82f6;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
 
         .btn {
             display: block;
             width: 100%;
             padding: 12px;
-            background-color: #3498db;
+            background-color: #3b82f6;
             color: white;
             border: none;
-            border-radius: 6px;
-            font-size: 18px;
+            border-radius: 10px;
+            font-size: 16px;
             cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 20px;
-            font-weight: 600;
+            transition: all 0.2s;
+            margin-top: 15px;
+            font-weight: 700;
             text-align: center;
+            box-shadow: 0 4px 0 #2563eb, 0 8px 10px rgba(59, 130, 246, 0.3);
         }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #2563eb, 0 10px 15px rgba(59, 130, 246, 0.4); }
+        .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #2563eb; }
 
-            .btn:hover {
-                background-color: #2980b9;
-            }
+        .btn-success { background-color: #10b981; box-shadow: 0 4px 0 #059669, 0 8px 10px rgba(16, 185, 129, 0.3); margin-top: 25px;}
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #059669, 0 10px 15px rgba(16, 185, 129, 0.4); }
+        .btn-success:active { transform: translateY(3px); box-shadow: 0 1px 0 #059669; }
 
-        .btn-success {
-            background-color: #2ecc71;
-            margin-top: 40px;
-        }
-
-            .btn-success:hover {
-                background-color: #27ae60;
-            }
-
-        .btn-warning {
-            background-color: #f39c12;
-            margin-top: 40px;
-        }
-
-            .btn-warning:hover {
-                background-color: #d68910;
-            }
+        .btn-warning { background-color: #f59e0b; box-shadow: 0 4px 0 #d97706, 0 8px 10px rgba(245, 158, 11, 0.3); }
+        .btn-warning:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #d97706; }
+        .btn-warning:active { transform: translateY(3px); box-shadow: 0 1px 0 #d97706; }
 
         .header-info {
             display: flex;
             justify-content: space-between;
-            background: #e8f4f8;
-            padding: 10px 20px;
+            background: #eff6ff;
+            padding: 10px 15px;
             border-radius: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-weight: 600;
-            color: #2980b9;
+            font-size: 14px;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+        }
+
+        .choices-wrapper {
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            margin-bottom: 20px;
         }
 
         .choices-container {
-            background: #fdf2e9;
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px; 
             border-radius: 12px;
-            border: 2px dashed #e67e22;
-            margin-bottom: 30px;
-            min-height: 80px;
+            border: 2px dashed #8b5cf6;
+            min-height: 70px;
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 8px; 
             justify-content: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
-        /* สไตล์ของบล็อกที่ลากได้ */
         .block {
-            background: #e67e22;
+            background: linear-gradient(to bottom, #a78bfa, #8b5cf6);
             color: white;
-            padding: 10px 16px;
-            border-radius: 6px;
+            padding: 8px 14px; 
+            border-radius: 8px;
             cursor: grab;
-            font-size: 14px;
+            font-size: 13px; 
             user-select: none;
-            box-shadow: 0 3px 6px rgba(230,126,34,0.4);
+            box-shadow: 0 3px 4px rgba(139, 92, 246, 0.4);
             font-weight: 600;
-            transition: transform 0.1s;
+            transition: all 0.2s;
             text-align: center;
-            /* 📱 ป้องกันมือถือเข้าใจผิดว่าการใช้นิ้วลากบล็อก คือการเลื่อนหน้าจอปกติ */
+            border: 1px solid #7c3aed;
             touch-action: none;
+            position: relative;
+            z-index: 50;
         }
+        .block:hover { transform: translateY(-2px); box-shadow: 0 5px 8px rgba(139, 92, 246, 0.5); }
+        .block:active { cursor: grabbing; transform: scale(0.95); box-shadow: 0 2px 3px rgba(139, 92, 246, 0.3); }
 
-            .block:active {
-                cursor: grabbing;
-                transform: scale(0.95);
-            }
-
-        /* -------------------------------------
-           สไตล์การวาดผังงาน (Flowchart Design)
-        -------------------------------------- */
         .flowchart-container {
             background: #ffffff;
             border-radius: 12px;
-            padding: 30px 10px;
+            padding: 20px 5px;
+            border: 2px solid #e5e7eb;
             overflow-x: auto;
+            position: relative;
+            z-index: 1;
         }
 
-        .fc-col {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            width: 100%;
-        }
-
-        .fc-row {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            position: relative;
-            gap: 0;
-        }
+        .fc-col { display: flex; flex-direction: column; align-items: center; position: relative; width: 100%; }
+        .fc-row { display: flex; justify-content: center; width: 100%; position: relative; gap: 0; }
 
         .fc-shape-wrap {
             position: relative;
-            width: 220px;
-            min-height: 70px;
+            width: 200px; 
+            min-height: 60px; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -187,291 +195,219 @@
 
         .fc-shape-bg {
             position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            top: 0; bottom: 0; left: 0; right: 0;
             z-index: 1;
-            border: 3px dashed #bdc3c7;
-            background: #f8f9fa;
-            transition: all 0.3s;
+            border: 2px dashed #cbd5e1;
+            background: #f8fafc;
+            transition: all 0.3s ease;
         }
 
-            .fc-shape-bg.pill {
-                border-radius: 50px;
-            }
-
-            .fc-shape-bg.rect {
-                border-radius: 8px;
-            }
-
-            .fc-shape-bg.para {
-                transform: skew(-20deg);
-                left: 10px;
-                right: 10px;
-            }
-
-            .fc-shape-bg.diamond {
-                width: 100px;
-                height: 100px;
-                top: 50%;
-                left: 50%;
-                margin-top: -50px;
-                margin-left: -50px;
-                transform: rotate(45deg);
-                border-radius: 8px;
-            }
+        .fc-shape-bg.pill { border-radius: 40px; }
+        .fc-shape-bg.rect { border-radius: 8px; }
+        .fc-shape-bg.para { transform: skew(-15deg); left: 10px; right: 10px; border-radius: 6px; }
+        .fc-shape-bg.diamond {
+            width: 86px; height: 86px; 
+            top: 50%; left: 50%;
+            margin-top: -43px; margin-left: -43px;
+            transform: rotate(45deg);
+            border-radius: 8px;
+        }
 
         .fc-dropzone {
             position: relative;
             z-index: 2;
             width: 100%;
             height: 100%;
-            min-height: 70px;
+            min-height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            font-size: 14px;
+            font-size: 13px; 
             font-weight: 600;
-            color: #95a5a6;
-            padding: 5px;
+            color: #94a3b8;
+            padding: 4px;
+            border-radius: 8px;
         }
 
-            .fc-dropzone.drag-over + .fc-shape-bg, .fc-dz-small.drag-over {
-                border-color: #3498db !important;
-                background: #ebf5fb !important;
-            }
+        .fc-dropzone.drag-over + .fc-shape-bg, .fc-dz-small.drag-over {
+            border-color: #3b82f6 !important;
+            border-style: solid !important;
+            background: #eff6ff !important;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+            transform: scale(1.05);
+        }
 
         .fc-arrow-down {
             width: 2px;
-            height: 35px;
-            background: #2c3e50;
+            height: 25px; 
+            background: #475569;
             margin: 0 auto;
             position: relative;
         }
-
-            .fc-arrow-down::after {
-                content: '';
-                position: absolute;
-                bottom: -2px;
-                left: -5px;
-                border-width: 6px 6px 0;
-                border-style: solid;
-                border-color: #2c3e50 transparent transparent transparent;
-            }
+        .fc-arrow-down::after {
+            content: '';
+            position: absolute;
+            bottom: -3px; left: -5px;
+            border-width: 6px 5px 0;
+            border-style: solid;
+            border-color: #475569 transparent transparent transparent;
+        }
 
         .fc-joiner {
-            width: 50%;
-            height: 25px;
-            border-left: 2px solid #2c3e50;
-            border-right: 2px solid #2c3e50;
-            border-bottom: 2px solid #2c3e50;
+            width: 50%; height: 20px;
+            border-left: 2px solid #475569;
+            border-right: 2px solid #475569;
+            border-bottom: 2px solid #475569;
             margin: 0 auto;
             border-radius: 0 0 8px 8px;
         }
 
         .fc-dz-small-wrap {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2px;
-            position: relative;
-            z-index: 10;
-            background: #fff;
-            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            padding: 2px; position: relative; z-index: 10;
+            background: #fff; border-radius: 6px;
         }
 
         .fc-dz-small {
-            width: 80px;
-            min-height: 35px;
-            border: 2px dashed #bdc3c7;
-            background: #fff;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            font-weight: 600;
-            color: #95a5a6;
-            padding: 2px;
+            width: 70px; min-height: 30px; 
+            border: 2px dashed #cbd5e1;
+            background: #fff; border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: 600; color: #94a3b8; padding: 2px;
+            transition: all 0.3s;
         }
 
-        .fc-dropzone:has(.block) .placeholder {
-            display: none;
-        }
+        .fc-dropzone:has(.block) .placeholder { display: none; }
 
-        /* สไตล์บล็อกปกติเมื่ออยู่ในผังงาน */
         .fc-dropzone .block {
             background: transparent !important;
-            color: #2c3e50 !important;
+            color: #1e293b !important;
             box-shadow: none !important;
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border: none !important;
+            width: 100%; height: 100%; margin: 0;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        /* สีของรูปทรงเมื่อวางบล็อกปกติ */
-        .fc-shape-wrap:has(.block) .fc-shape-bg.pill {
-            border-style: solid;
-            background: #d1f2eb;
-            border-color: #1abc9c;
-        }
+        .fc-shape-wrap:has(.block) .fc-shape-bg.pill { border-style: solid; background: #fee2e2; border-color: #ef4444; box-shadow: inset 0 2px 4px rgba(255,255,255,0.5); }
+        .fc-shape-wrap:has(.block) .fc-shape-bg.rect { border-style: solid; background: #dbeafe; border-color: #3b82f6; box-shadow: inset 0 2px 4px rgba(255,255,255,0.5); }
+        .fc-shape-wrap:has(.block) .fc-shape-bg.para { border-style: solid; background: #fef3c7; border-color: #f59e0b; box-shadow: inset 0 2px 4px rgba(255,255,255,0.5); }
+        .fc-shape-wrap:has(.block) .fc-shape-bg.diamond { border-style: solid; background: #d1fae5; border-color: #10b981; box-shadow: inset 0 2px 4px rgba(255,255,255,0.5); }
+        .fc-dz-small:has(.block) { border-style: solid; background: #f3e8ff; border-color: #8b5cf6; }
 
-        .fc-shape-wrap:has(.block) .fc-shape-bg.rect {
-            border-style: solid;
-            background: #fdebd0;
-            border-color: #f39c12;
-        }
-
-        .fc-shape-wrap:has(.block) .fc-shape-bg.para {
-            border-style: solid;
-            background: #d6eaf8;
-            border-color: #3498db;
-        }
-
-        .fc-shape-wrap:has(.block) .fc-shape-bg.diamond {
-            border-style: solid;
-            background: #fcf3cf;
-            border-color: #f1c40f;
-        }
-
-        .fc-dz-small:has(.block) {
-            border-style: solid;
-            background: #fdf2e9;
-            border-color: #e67e22;
-        }
-
-        /* --- สไตล์สำหรับตอนเฉลยคำตอบ (Show Solution) --- */
-        .fc-dropzone .block.correct-ans {
-            background: #2ecc71 !important;
-            color: #fff !important;
-            border-radius: 6px;
-        }
-
+        .fc-dropzone .block.correct-ans { background: #10b981 !important; color: #fff !important; border-radius: 6px; font-weight: bold; }
         .fc-dropzone .block.wrong-ans {
-            background: #e74c3c !important;
-            color: #fff !important;
-            border-radius: 6px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            line-height: 1.2;
-            padding: 5px;
+            background: #ef4444 !important; color: #fff !important; border-radius: 6px;
+            display: flex; flex-direction: column; justify-content: center; line-height: 1.2; padding: 4px;
         }
-
-        .wrong-ans s {
-            font-size: 11px;
-            opacity: 0.8;
-            font-weight: normal;
-        }
-
-        .wrong-ans .sol-text {
-            font-size: 13px;
-            font-weight: bold;
-            margin-top: 3px;
-            color: #ffeaa7;
-        }
+        .wrong-ans s { font-size: 11px; opacity: 0.8; font-weight: normal; }
+        .wrong-ans .sol-text { font-size: 12px; font-weight: bold; margin-top: 2px; color: #fef08a; }
 
         .result-card {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            border: 2px solid #eee;
-            margin-top: 20px;
+            background: #fff; padding: 25px; border-radius: 12px;
+            text-align: center; border: 2px solid #e5e7eb; margin-top: 20px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.05);
         }
-
-        .score-display {
-            font-size: 48px;
-            color: #e74c3c;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-
-        #saveStatus {
-            font-weight: bold;
-            margin-top: 15px;
-            font-size: 16px;
-            text-align: center;
-        }
+        .score-display { font-size: 50px; color: #10b981; font-weight: 800; margin: 10px 0; }
+        #saveStatus { font-weight: bold; margin-top: 15px; font-size: 16px; text-align: center; padding: 10px; border-radius: 8px; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <div id="start-screen" class="screen active">
-            <h1>🎮 เกมต่อจิ๊กซอว์ผังงาน</h1>
-            <p style="text-align:center;">ฝึกทักษะการวางลำดับความคิดด้วยผังงาน สำหรับชั้น ม.1</p>
-            <div style="margin-top: 30px;">
+            <h1><i class="fas fa-puzzle-piece text-blue-500"></i> เกมต่อจิ๊กซอว์ผังงาน</h1>
+            <p style="text-align:center; color:#64748b; font-size:1rem;">ฝึกทักษะการวางลำดับความคิดด้วยผังงาน สำหรับชั้น ม.1</p>
+            
+            <form id="startForm" style="margin-top: 20px; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;">
                 <div class="form-group">
-                    <label>ชื่อ - นามสกุล</label>
-                    <input type="text" id="studentName" placeholder="กรุณากรอกชื่อ-นามสกุล">
+                    <label><i class="fas fa-user text-blue-500 mr-1"></i> ชื่อ - นามสกุล</label>
+                    <input type="text" id="studentName" placeholder="กรุณากรอกชื่อ-นามสกุล" required>
                 </div>
                 <div class="form-group">
-                    <label>ชั้น (เช่น ม.1/1)</label>
-                    <input type="text" id="studentClass" placeholder="กรุณากรอกชั้นเรียน">
+                    <label><i class="fas fa-users text-blue-500 mr-1"></i> ชั้น</label>
+                    <input type="text" id="studentClass" placeholder="เช่น ม.1/1" required>
                 </div>
                 <div class="form-group">
-                    <label>เลขที่</label>
-                    <input type="number" id="studentNumber" placeholder="กรุณากรอกเลขที่">
+                    <label><i class="fas fa-id-badge text-blue-500 mr-1"></i> เลขที่</label>
+                    <input type="number" id="studentNumber" placeholder="กรุณากรอกเลขที่" required>
                 </div>
-                <button class="btn" onclick="startGame()">เริ่มเล่นเกม 🚀</button>
-            </div>
+                <button type="submit" class="btn">เริ่มเล่นเกม 🚀</button>
+            </form>
         </div>
 
         <div id="game-screen" class="screen">
             <div class="header-info">
-                <span id="displayUserInfo">ผู้เล่น: -</span>
-                <span id="displayLevel">ด่านที่: 1/5</span>
+                <span id="displayUserInfo"><i class="fas fa-user-circle"></i> ผู้เล่น: -</span>
+                <span id="displayLevel" class="bg-blue-100 px-2 py-1 rounded-full text-blue-800 border border-blue-200">ด่านที่: 1/5</span>
             </div>
 
-            <h2 id="levelTitle">ชื่อสถานการณ์</h2>
+            <h2 id="levelTitle" style="color: #4f46e5; margin-bottom: 15px; font-weight: 700;">ชื่อสถานการณ์</h2>
 
-            <h3>🧩 ชิ้นส่วนจิ๊กซอว์ (ลากเพื่อไปวางในช่องว่างด้านล่าง)</h3>
-            <div class="choices-container" id="choices" ondragover="allowDrop(event)" ondrop="drop(event)">
+            <div class="choices-wrapper">
+                <h3 style="margin-bottom: 5px; font-size: 1rem;"><i class="fas fa-hand-pointer text-purple-500"></i> ลากชิ้นส่วนด้านล่างไปวางในผังงาน</h3>
+                <div class="choices-container" id="choices" ondragover="allowDrop(event)" ondrop="drop(event)">
+                </div>
             </div>
 
-            <h3 style="margin-top: 40px;">📝 จัดวางลำดับผังงาน</h3>
             <div class="flowchart-container" id="flowchart">
-            </div>
+                </div>
 
-            <button id="actionBtn" class="btn btn-success" onclick="handleActionBtn()">ตรวจคำตอบ ✅</button>
+            <button id="actionBtn" class="btn btn-success" onclick="handleActionBtn()">ตรวจคำตอบ <i class="fas fa-check-circle"></i></button>
         </div>
 
         <div id="result-screen" class="screen">
-            <h1>🏆 สรุปผลคะแนน</h1>
+            <h1><i class="fas fa-trophy text-yellow-400 text-4xl mb-2"></i><br>สรุปผลคะแนน</h1>
             <div class="result-card">
-                <h2 id="resultName">ชื่อ: </h2>
-                <p id="resultClassNum">ชั้น: | เลขที่: </p>
+                <h2 id="resultName" style="color:#1e293b;">ชื่อ: </h2>
+                <p id="resultClassNum" style="color:#64748b; font-size:1rem; font-weight:600;">ชั้น: | เลขที่: </p>
                 <div class="score-display">
-                    <span id="finalScore">0</span> / <span id="totalScore">0</span>
+                    <span id="finalScore">0</span> <span style="font-size:24px; color:#cbd5e1;">/</span> <span id="totalScore" style="font-size:30px; color:#94a3b8;">0</span>
                 </div>
-                <p>คะแนนรวมทั้งหมด</p>
-                <div id="saveStatus">⏳ กำลังจัดเตรียมการส่งข้อมูล...</div>
+                <p style="color:#64748b; font-weight:600; font-size: 14px;">คะแนนรวมทั้งหมดที่ทำได้</p>
+                <div id="saveStatus" style="background:#eff6ff; color:#3b82f6; border:1px solid #bfdbfe;">⏳ กำลังจัดเตรียมการส่งข้อมูล...</div>
             </div>
-            <button class="btn" onclick="location.reload()">เล่นอีกครั้ง 🔄</button>
+            <button class="btn" onclick="location.reload()"><i class="fas fa-redo-alt mr-2"></i> เล่นอีกครั้ง</button>
         </div>
 
     </div>
 
     <script>
-        // 📱 เปิดใช้งานระบบลากวางและเลื่อนหน้าจอสำหรับมือถือ
-        MobileDragDrop.polyfill({
-            dragImageTranslateOverride: MobileDragDrop.scrollBehaviourDragImageTranslateOverride
+        // ระบบดักจับ Error กรณีโหลด Script ลากวางไม่สำเร็จ
+        try {
+            if (typeof MobileDragDrop !== 'undefined') {
+                MobileDragDrop.polyfill({
+                    dragImageTranslateOverride: MobileDragDrop.scrollBehaviourDragImageTranslateOverride
+                });
+                window.addEventListener('touchmove', function () { }, { passive: false });
+            }
+        } catch(e) {
+            console.warn("MobileDragDrop โหลดไม่สมบูรณ์ แต่เกมยังคงเล่นต่อได้:", e);
+        }
+
+        // ระบบเลื่อนจอออโต้เมื่อลากกล่อง
+        document.addEventListener('dragover', (e) => {
+            const edgeThreshold = 80; 
+            const scrollSpeed = 15;   
+            const viewportY = e.clientY;
+            
+            if (viewportY < edgeThreshold) {
+                window.scrollBy(0, -scrollSpeed);
+            } else if (window.innerHeight - viewportY < edgeThreshold) {
+                window.scrollBy(0, scrollSpeed);
+            }
         });
 
-        // ป้องกัน iPad/iPhone เลื่อนหน้าจอตอนลาก
-        window.addEventListener('touchmove', function () { }, { passive: false });
+        // จัดการเหตุการณ์เมื่อกดปุ่ม Submit (Enter หรือ Click)
+        document.getElementById('startForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // บล็อกไม่ให้หน้าเว็บโหลดใหม่เวลาที่กดเริ่ม
+            startGame();
+        });
 
-        // 🔗 URL ฝั่ง Google Apps Script ของคุณครู
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyrcPOFfNveP9EtW96B2VF2M4LHWiRKNZDxL3t-YnTLdxZU6OS2aPlnJhAhJsgnWt4/exec";
 
         // --- Helper Functions สำหรับวาด HTML ผังงาน ---
-        const shape = (type, correct) => `<div class="fc-shape-wrap"><div class="fc-shape-bg ${type}"></div><div class="fc-dropzone" data-correct='${correct}'><span class="placeholder">วางที่นี่</span></div></div>`;
+        const shape = (type, correct) => `<div class="fc-shape-wrap"><div class="fc-shape-bg ${type}"></div><div class="fc-dropzone" data-correct='${correct}'><span class="placeholder"><i class="fas fa-plus opacity-40 mb-1 block text-lg"></i>วาง</span></div></div>`;
         const arrow = () => `<div class="fc-arrow-down"></div>`;
         const dzSmall = (correct) => `<div class="fc-dz-small-wrap"><div class="fc-dz-small fc-dropzone" data-correct='${correct}'><span class="placeholder">วาง</span></div></div>`;
 
@@ -492,9 +428,9 @@
         `;
 
         const loopLine = (topPx, heightPx, label) => `
-            <div style="position: absolute; left: calc(50% - 160px); top: ${topPx}px; height: ${heightPx}px; width: 60px; border-left: 2px solid #2c3e50; border-top: 2px solid #2c3e50; border-bottom: 2px solid #2c3e50; z-index: 0;">
-                <div style="position: absolute; top: -6px; right: -2px; border-width: 5px 0 5px 8px; border-style: solid; border-color: transparent transparent transparent #2c3e50;"></div>
-                <div style="position: absolute; bottom: -18px; left: 10px; z-index: 10;">
+            <div style="position: absolute; left: calc(50% - 140px); top: ${topPx}px; height: ${heightPx}px; width: 45px; border-left: 2px solid #475569; border-top: 2px solid #475569; border-bottom: 2px solid #475569; z-index: 0;">
+                <div style="position: absolute; top: -5px; right: -2px; border-width: 4px 0 4px 6px; border-style: solid; border-color: transparent transparent transparent #475569;"></div>
+                <div style="position: absolute; bottom: -15px; left: 5px; z-index: 10;">
                     ${dzSmall(label)}
                 </div>
             </div>
@@ -502,55 +438,55 @@
 
         const levelsData = [
             {
-                title: "สถานการณ์ที่ 1: การซื้อไอเทมลับ (ดาบแสง) ในร้านค้า Roblox",
-                blocks: ["รับค่าจำนวน Robux ในกระเป๋าของผู้เล่น", "ใช่", "เริ่มต้น", "มี Robux >= 500 ใช่หรือไม่?", "ไม่ใช่", "หัก 500 Robux และเพิ่มดาบแสงในช่องเก็บของ", "จบการทำงาน", "แสดงข้อความแจ้งเตือน \"Robux ไม่เพียงพอ\""],
+                title: "สถานการณ์ที่ 1: การซื้อดาบแสงใน Roblox",
+                blocks: ["รับค่าจำนวน Robux", "ใช่", "เริ่มต้น", "มี Robux >= 500 ใช่หรือไม่?", "ไม่ใช่", "หัก 500 Robux และรับดาบ", "จบการทำงาน", "แสดงข้อความเงินไม่พอ"],
                 score: 8,
                 html: `
                     <div class="fc-col">
                       ${shape('pill', 'เริ่มต้น')}
                       ${arrow()}
-                      ${shape('para', 'รับค่าจำนวน Robux ในกระเป๋าของผู้เล่น')}
+                      ${shape('para', 'รับค่าจำนวน Robux')}
                       ${arrow()}
                       ${shape('diamond', 'มี Robux >= 500 ใช่หรือไม่?')}
-                      ${splitNode('ใช่', 'หัก 500 Robux และเพิ่มดาบแสงในช่องเก็บของ', 'ไม่ใช่', 'แสดงข้อความแจ้งเตือน "Robux ไม่เพียงพอ"')}
+                      ${splitNode('ใช่', 'หัก 500 Robux และรับดาบ', 'ไม่ใช่', 'แสดงข้อความเงินไม่พอ')}
                       ${arrow()}
                       ${shape('pill', 'จบการทำงาน')}
                     </div>
                 `
             },
             {
-                title: "สถานการณ์ที่ 2: การกระโดดผ่านด่านอุปสรรค (Obby) เลเซอร์",
-                blocks: ["จบการทำงาน", "กระโดดข้ามเลเซอร์", "ไม่ใช่", "เดินเข้าสู่จุด Checkpoint ต่อไป", "เริ่มต้น", "พลาดโดนเลเซอร์ (ตัวแตก) ใช่หรือไม่?", "ใช่"],
+                title: "สถานการณ์ที่ 2: ด่านเลเซอร์หฤโหด (Obby)",
+                blocks: ["จบการทำงาน", "กระโดดข้ามเลเซอร์", "ไม่ใช่", "เข้าสู่ Checkpoint ต่อไป", "เริ่มต้น", "โดนเลเซอร์ (ตัวแตก) ใช่หรือไม่?", "ใช่"],
                 score: 7,
                 html: `
                     <div class="fc-col" style="position: relative;">
-                        ${loopLine(175, 125, 'ใช่')}
+                        ${loopLine(135, 100, 'ใช่')}
                         ${shape('pill', 'เริ่มต้น')}
                         ${arrow()}
                         ${shape('rect', 'กระโดดข้ามเลเซอร์')}
                         ${arrow()}
-                        ${shape('diamond', 'พลาดโดนเลเซอร์ (ตัวแตก) ใช่หรือไม่?')}
+                        ${shape('diamond', 'โดนเลเซอร์ (ตัวแตก) ใช่หรือไม่?')}
                         ${arrow()}
                         ${dzSmall('ไม่ใช่')}
                         ${arrow()}
-                        ${shape('rect', 'เดินเข้าสู่จุด Checkpoint ต่อไป')}
+                        ${shape('rect', 'เข้าสู่ Checkpoint ต่อไป')}
                         ${arrow()}
                         ${shape('pill', 'จบการทำงาน')}
                     </div>
                 `
             },
             {
-                title: "สถานการณ์ที่ 3: การตอบคำถาม Present Simple Tense เพื่อเปิดประตูลับ",
-                blocks: ["รับคำตอบภาษาอังกฤษจากผู้เล่น", "ประตูลับเปิดออก", "ใช่", "เริ่มต้น", "ไม่ใช่", "ผู้เล่นพิมพ์คำตอบถูกต้องใช่หรือไม่?", "จบการทำงาน"],
+                title: "สถานการณ์ที่ 3: ตอบคำถามเปิดประตูลับ",
+                blocks: ["พิมพ์คำตอบภาษาอังกฤษ", "ประตูลับเปิดออก", "ใช่", "เริ่มต้น", "ไม่ใช่", "คำตอบถูกต้องใช่หรือไม่?", "จบการทำงาน"],
                 score: 7,
                 html: `
                     <div class="fc-col" style="position: relative;">
-                        ${loopLine(175, 125, 'ไม่ใช่')}
+                        ${loopLine(135, 100, 'ไม่ใช่')}
                         ${shape('pill', 'เริ่มต้น')}
                         ${arrow()}
-                        ${shape('para', 'รับคำตอบภาษาอังกฤษจากผู้เล่น')}
+                        ${shape('para', 'พิมพ์คำตอบภาษาอังกฤษ')}
                         ${arrow()}
-                        ${shape('diamond', 'ผู้เล่นพิมพ์คำตอบถูกต้องใช่หรือไม่?')}
+                        ${shape('diamond', 'คำตอบถูกต้องใช่หรือไม่?')}
                         ${arrow()}
                         ${dzSmall('ใช่')}
                         ${arrow()}
@@ -561,17 +497,17 @@
                 `
             },
             {
-                title: "สถานการณ์ที่ 4: การสั่งข้าวมันไก่ผ่านแอปพลิเคชันเดลิเวอรี",
-                blocks: ["กดยืนยันการสั่งอาหาร", "เริ่มต้น", "ระบบคิดค่าจัดส่งตามระยะทางจริง", "มีคูปองส่วนลดค่าส่งหรือไม่?", "จบการทำงาน", "เลือกเมนูข้าวมันไก่ลงในตะกร้า", "ระบบหักลบค่าจัดส่ง", "ใช่", "ไม่ใช่"],
+                title: "สถานการณ์ที่ 4: สั่งข้าวมันไก่เดลิเวอรี",
+                blocks: ["กดยืนยันการสั่งอาหาร", "เริ่มต้น", "คิดค่าส่งตามระยะทาง", "มีคูปองส่งฟรีหรือไม่?", "จบการทำงาน", "เลือกข้าวมันไก่ลงตะกร้า", "หักลบค่าจัดส่ง", "ใช่", "ไม่ใช่"],
                 score: 9,
                 html: `
                     <div class="fc-col">
                       ${shape('pill', 'เริ่มต้น')}
                       ${arrow()}
-                      ${shape('para', 'เลือกเมนูข้าวมันไก่ลงในตะกร้า')}
+                      ${shape('para', 'เลือกข้าวมันไก่ลงตะกร้า')}
                       ${arrow()}
-                      ${shape('diamond', 'มีคูปองส่วนลดค่าส่งหรือไม่?')}
-                      ${splitNode('ใช่', 'ระบบหักลบค่าจัดส่ง', 'ไม่ใช่', 'ระบบคิดค่าจัดส่งตามระยะทางจริง')}
+                      ${shape('diamond', 'มีคูปองส่งฟรีหรือไม่?')}
+                      ${splitNode('ใช่', 'หักลบค่าจัดส่ง', 'ไม่ใช่', 'คิดค่าส่งตามระยะทาง')}
                       ${arrow()}
                       ${shape('rect', 'กดยืนยันการสั่งอาหาร')}
                       ${arrow()}
@@ -580,21 +516,21 @@
                 `
             },
             {
-                title: "สถานการณ์ที่ 5: การตีมอนสเตอร์ป่า (Farming) เพื่ออัปเลเวลในเกม MOBA",
-                blocks: ["จบการทำงาน", "กดโจมตีมอนสเตอร์ป่า", "ตัวละครได้รับเหรียญทองและค่าประสบการณ์ (EXP)", "ใช่", "พลังชีวิตของมอนสเตอร์หมด (เท่ากับ 0) ใช่หรือไม่?", "ไม่ใช่", "เริ่มต้น"],
+                title: "สถานการณ์ที่ 5: ฟาร์มป่าอัปเลเวล (MOBA)",
+                blocks: ["จบการทำงาน", "โจมตีมอนสเตอร์", "ได้รับทองและ EXP", "ใช่", "HP มอนสเตอร์ = 0 ใช่หรือไม่?", "ไม่ใช่", "เริ่มต้น"],
                 score: 7,
                 html: `
                     <div class="fc-col" style="position: relative;">
-                        ${loopLine(175, 125, 'ไม่ใช่')}
+                        ${loopLine(135, 100, 'ไม่ใช่')}
                         ${shape('pill', 'เริ่มต้น')}
                         ${arrow()}
-                        ${shape('rect', 'กดโจมตีมอนสเตอร์ป่า')}
+                        ${shape('rect', 'โจมตีมอนสเตอร์')}
                         ${arrow()}
-                        ${shape('diamond', 'พลังชีวิตของมอนสเตอร์หมด (เท่ากับ 0) ใช่หรือไม่?')}
+                        ${shape('diamond', 'HP มอนสเตอร์ = 0 ใช่หรือไม่?')}
                         ${arrow()}
                         ${dzSmall('ใช่')}
                         ${arrow()}
-                        ${shape('rect', 'ตัวละครได้รับเหรียญทองและค่าประสบการณ์ (EXP)')}
+                        ${shape('rect', 'ได้รับทองและ EXP')}
                         ${arrow()}
                         ${shape('pill', 'จบการทำงาน')}
                     </div>
@@ -607,19 +543,14 @@
         let maxScore = 0;
         levelsData.forEach(level => maxScore += level.score);
         let draggedItem = null;
-        let isCheckingMode = false; // ตัวแปรเช็คว่าอยู่ในโหมดแสดงเฉลยหรือไม่
+        let isCheckingMode = false; 
 
         function startGame() {
-            const name = document.getElementById('studentName').value.trim();
+            const sName = document.getElementById('studentName').value.trim();
             const sClass = document.getElementById('studentClass').value.trim();
             const sNum = document.getElementById('studentNumber').value.trim();
 
-            if (!name || !sClass || !sNum) {
-                alert("กรุณากรอกข้อมูลส่วนตัวให้ครบถ้วนก่อนเริ่มเกมครับ");
-                return;
-            }
-
-            document.getElementById('displayUserInfo').innerText = `ผู้เล่น: ${name} (${sClass} เลขที่ ${sNum})`;
+            document.getElementById('displayUserInfo').innerHTML = `<i class="fas fa-user-circle"></i> ผู้เล่น: ${sName} (${sClass} เลขที่ ${sNum})`;
             switchScreen('start-screen', 'game-screen');
             loadLevel();
         }
@@ -631,15 +562,13 @@
             }
 
             isCheckingMode = false;
-
-            // รีเซ็ตปุ่ม
             const btn = document.getElementById('actionBtn');
-            btn.innerText = "ตรวจคำตอบ ✅";
+            btn.innerHTML = "ตรวจคำตอบ <i class='fas fa-check-circle'></i>";
             btn.className = "btn btn-success";
 
             const level = levelsData[currentLevel];
             document.getElementById('displayLevel').innerText = `ด่านที่: ${currentLevel + 1} / ${levelsData.length}`;
-            document.getElementById('levelTitle').innerText = level.title;
+            document.getElementById('levelTitle').innerHTML = `<i class="fas fa-map-marked-alt text-purple-500 mr-2"></i> ${level.title}`;
 
             const choicesContainer = document.getElementById('choices');
             const flowchartContainer = document.getElementById('flowchart');
@@ -653,7 +582,8 @@
                 block.className = 'block';
                 block.draggable = true;
                 block.id = `block-${currentLevel}-${index}`;
-                block.innerText = text;
+                block.innerHTML = text;
+                block.dataset.rawText = text;
                 block.addEventListener('dragstart', dragStart);
                 block.addEventListener('dragend', dragEnd);
                 choicesContainer.appendChild(block);
@@ -666,13 +596,15 @@
                 zone.addEventListener('dragleave', dragLeave);
                 zone.addEventListener('drop', dragDrop);
             });
+            
+            window.scrollTo(0, 0);
         }
 
         // --- Drag & Drop Functions ---
         function dragStart(e) {
             if (isCheckingMode) return;
             draggedItem = this;
-            setTimeout(() => this.style.opacity = '0', 0);
+            setTimeout(() => this.style.opacity = '0.5', 0);
         }
         function dragEnd(e) {
             setTimeout(() => { this.style.opacity = '1'; draggedItem = null; }, 0);
@@ -703,7 +635,6 @@
             }
         }
 
-        // --- ควบคุมปุ่มกด ---
         function handleActionBtn() {
             if (isCheckingMode) {
                 currentLevel++;
@@ -713,7 +644,6 @@
             }
         }
 
-        // --- ระบบตรวจคำตอบแบบฉลาด + แสดงเฉลย ---
         function checkAnswerAndShowSolution() {
             const dropzones = Array.from(document.querySelectorAll('.fc-dropzone'));
             let allFilled = true;
@@ -723,7 +653,7 @@
             });
 
             if (!allFilled) {
-                alert("กรุณาวางบล็อกให้ครบทุกตำแหน่งก่อนตรวจคำตอบครับ");
+                alert("กรุณาวางจิ๊กซอว์ให้ครบทุกตำแหน่งก่อนตรวจคำตอบครับ!");
                 return;
             }
 
@@ -734,7 +664,8 @@
             normalZones.forEach(zone => {
                 const block = zone.querySelector('.block');
                 const correctAns = zone.dataset.correct.trim();
-                if (block.innerText.trim() === correctAns) {
+                const studentAns = block.dataset.rawText.trim();
+                if (studentAns === correctAns) {
                     levelScore++;
                     markBlockStatus(block, true);
                 } else {
@@ -749,12 +680,12 @@
                     const zonesR = Array.from(cols[1].querySelectorAll('.fc-dropzone'));
 
                     let scoreNormal = 0;
-                    zonesL.forEach(z => { if (z.querySelector('.block').innerText.trim() === z.dataset.correct.trim()) scoreNormal++; });
-                    zonesR.forEach(z => { if (z.querySelector('.block').innerText.trim() === z.dataset.correct.trim()) scoreNormal++; });
+                    zonesL.forEach(z => { if (z.querySelector('.block').dataset.rawText.trim() === z.dataset.correct.trim()) scoreNormal++; });
+                    zonesR.forEach(z => { if (z.querySelector('.block').dataset.rawText.trim() === z.dataset.correct.trim()) scoreNormal++; });
 
                     let scoreSwapped = 0;
-                    zonesL.forEach((z, idx) => { if (z.querySelector('.block').innerText.trim() === zonesR[idx].dataset.correct.trim()) scoreSwapped++; });
-                    zonesR.forEach((z, idx) => { if (z.querySelector('.block').innerText.trim() === zonesL[idx].dataset.correct.trim()) scoreSwapped++; });
+                    zonesL.forEach((z, idx) => { if (z.querySelector('.block').dataset.rawText.trim() === zonesR[idx].dataset.correct.trim()) scoreSwapped++; });
+                    zonesR.forEach((z, idx) => { if (z.querySelector('.block').dataset.rawText.trim() === zonesL[idx].dataset.correct.trim()) scoreSwapped++; });
 
                     if (scoreNormal >= scoreSwapped) {
                         zonesL.forEach(z => checkAndMarkZone(z, z.dataset.correct.trim()));
@@ -772,15 +703,18 @@
             isCheckingMode = true;
 
             const btn = document.getElementById('actionBtn');
-            btn.innerText = `ไปด่านต่อไป ⏭️ (ทำได้ ${levelScore} / ${dropzones.length} คะแนน)`;
+            btn.innerHTML = `ไปด่านต่อไป ⏭️ <br><span style="font-size:13px; font-weight:normal;">(ทำได้ ${levelScore} / ${dropzones.length} คะแนน)</span>`;
             btn.className = "btn btn-warning";
 
             document.querySelectorAll('.block').forEach(b => b.draggable = false);
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function checkAndMarkZone(zone, expectedAns) {
             const block = zone.querySelector('.block');
-            if (block.innerText.trim() === expectedAns) {
+            const studentAns = block.dataset.rawText.trim();
+            if (studentAns === expectedAns) {
                 markBlockStatus(block, true);
             } else {
                 markBlockStatus(block, false, expectedAns);
@@ -788,11 +722,12 @@
         }
 
         function markBlockStatus(block, isCorrect, correctAnsText = "") {
+            const originalText = block.dataset.rawText;
             if (isCorrect) {
                 block.classList.add('correct-ans');
+                block.innerHTML = `<i class="fas fa-check mr-1"></i> ${originalText}`;
             } else {
                 block.classList.add('wrong-ans');
-                const originalText = block.innerText;
                 block.innerHTML = `<s>${originalText}</s><span class="sol-text">เฉลย: ${correctAnsText}</span>`;
             }
         }
@@ -813,9 +748,10 @@
 
         function sendDataToGoogleSheets(name, sClass, sNum, score, maxScore) {
             const statusText = document.getElementById('saveStatus');
-
-            statusText.innerText = "⏳ กำลังส่งข้อมูลเข้า Google Sheets...";
-            statusText.style.color = "#e67e22";
+            statusText.innerHTML = "<i class='fas fa-spinner fa-spin mr-2'></i> กำลังส่งข้อมูลเข้าฐานข้อมูล...";
+            statusText.style.color = "#3b82f6";
+            statusText.style.backgroundColor = "#eff6ff";
+            statusText.style.borderColor = "#bfdbfe";
 
             fetch(WEB_APP_URL, {
                 method: 'POST',
@@ -823,12 +759,16 @@
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify({ name: name, studentClass: sClass, studentNumber: sNum, score: score, maxScore: maxScore })
             }).then(() => {
-                statusText.innerText = "✅ บันทึกข้อมูลเข้าฐานข้อมูลสำเร็จ!";
-                statusText.style.color = "#2ecc71";
+                statusText.innerHTML = "<i class='fas fa-check-circle mr-2'></i> บันทึกข้อมูลคะแนนสำเร็จ!";
+                statusText.style.color = "#10b981";
+                statusText.style.backgroundColor = "#ecfdf5";
+                statusText.style.borderColor = "#a7f3d0";
             }).catch((error) => {
                 console.error(error);
-                statusText.innerText = "❌ เกิดข้อผิดพลาด ไม่สามารถส่งข้อมูลได้";
-                statusText.style.color = "#e74c3c";
+                statusText.innerHTML = "<i class='fas fa-exclamation-triangle mr-2'></i> เกิดข้อผิดพลาด ไม่สามารถบันทึกได้";
+                statusText.style.color = "#ef4444";
+                statusText.style.backgroundColor = "#fef2f2";
+                statusText.style.borderColor = "#fecaca";
             });
         }
 
